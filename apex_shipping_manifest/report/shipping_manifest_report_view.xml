@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_shipping_manifest" model="report.paperformat">
+        <field name="name">Shipping Manifest</field>
+        <field name="default" eval="False" />
+        <field name="format">Letter</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+    <template id="shipping_manifest_css">
+        <style>
+                table {
+                    font-size: 13px;
+                }
+                .page {
+                    page-break-before:always;
+                    page-break-inside: avoid;
+                    min-height: 11in;
+                    height: auto;
+                    padding-top: 3em;
+                }
+                .page:first-of-type {
+                    padding-top: 0px;
+                }
+                .main-content {
+                    margin: 0;
+                    padding: 0;
+                    font-family: Arial, Helvetica, sans-serif;
+                    position: absolute;
+                    left: 2.5em;
+                    right: 2.5em;
+                    top: 2em;
+                }
+                td {
+                    height: 3.5em;
+                    vertical-align: middle;
+                }
+                #title {
+                    width: 100%;
+                    text-align: center;
+                    color: #094063;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                table, th, td {
+                  border: 1px solid #000000;
+                }
+                .table-wrapper {
+                    width: 100%;
+                }
+                #general-section {
+                    width: 49%;
+                    vertical-align: top;
+                    display: inline-block;
+                }
+                #delivery-section {
+                    width: 49%;
+                    vertical-align: top;
+                    display: inline-block;
+                    float: right;
+                }
+                .shipper-section {
+                    margin-top: 1em;
+                    width: 49%;
+                    vertical-align: top;
+                    display: inline-block;
+                    float: left;
+                }
+                .receiver-section {
+                    margin-top: 1em;
+                    width: 49%;
+                    vertical-align: top;
+                    display: inline-block;
+                    float: right;
+                }
+                .full-section {
+                    margin-top: 1em;
+                    width: 100%;
+                    vertical-align: top;
+                    display: inline-block;
+                    float: left;
+                }
+                .product-section {
+                    margin-top: 1em;
+                    vertical-align: top;
+                }
+                .td-content {
+                    width: 20em;
+                    padding-left: 10px;
+                }
+                .td-contentprod {
+                    width: 20em;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    font-size: 11px;
+                }
+                .td-contentprod-name {
+                    width: 45em;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    font-size: 11px;
+                }
+                .thin {
+                    height: 1em !important;
+                }
+                .center {
+                    text-align: center;
+                }
+                .sub-head {
+
+                }
+                .dual-sub-head {
+                    width:30%:
+                    display: inline-block;
+                    border: 1px solid #000000;
+                }
+                .td-half-content {
+                    width: 10em;
+                }
+                .td-third-content {
+                    width: 6.66em
+                }
+                .td-small-content {
+                    width: 15em;
+                }
+                .td-am-content {
+                    width: 5em;
+                }
+                .td-title {
+                    width: 12em;
+                    font-size: 12px;
+                    padding: .5em;
+                    text-transform: uppercase;
+                }
+                .box {
+                    outline: 1px solid #000;
+                    height: 15px;
+                    width: 30px;
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin-left: 10px;
+                }
+                .space {
+                    width: 40px;
+                    display: inline-block;
+                }
+                .hr-title {
+                    padding-left: 10px;
+                    background-color: #efefef;
+                    font-weight: bold;
+                }
+                .td-title-header {
+                    background-color: #efefef;
+                    font-weight: bold;
+                }
+                .subtotal {
+                    font-weight: bold;
+                    float: right;
+                    margin-top: 10px;
+                }
+            </style>
+    </template>
+    <template id="report_shipping_manifest">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="apex_shipping_manifest.shipping_manifest_css"/>
+                <t t-set="sale_id" t-value="o.group_id.sale_id"/>
+                <div class="main-content">
+                    <div class="page">
+                        <h2 id="title">SALES INVOICE/ SHIPPING MANIFEST</h2>
+                        <div class="table-wrapper">
+                            <div id="general-section">
+                                <table data-page="1" data-table="1">
+                                    <tr class="tr-title">
+                                        <td class="td-title td-title-header">INVOICE/MANIFEST NUMBER</td>
+                                        <td colspan="3" class="td-content">
+                                            <span t-field="sale_id.name"/>
+                                            <span>-</span>
+                                            <span t-field="o.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title td-title-header">ATTACHED PAGE(S)?</td>
+                                        <td class="center td-third-content">
+                                            <div><span>Yes</span>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span>No</span></div>
+                                            <div><div class="box"/>&amp;nbsp;<div class="box"/></div>
+                                        </td>
+                                        <td class="center td-third-content">#OF ATTACHED PAGES:&amp;nbsp;&amp;nbsp;</td>
+                                        <td class="center td-third-content">&amp;nbsp;</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="delivery-section">
+                                <table data-page="1" data-table="1">
+                                    <tr class="tr-title">
+                                        <td class="td-title td-title-header">ACTUAL DATE AND             
+                                            <br/> TIME OF DEPARTURE
+                                        </td>
+                                        <td class="td-small-content center">
+                                            <!-- 4.    ACTUAL DATE AND TIME OF DEPARTURE: to be typed in manually by client -->
+                                        </td>
+                                        <td class="times td-am-content">
+                                            <div>
+                                                <div class="box"/> AM
+                                                </div>
+                                            <div>
+                                                <div class="box"/> PM
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title td-title-header">ESTIMATED DATE AND 
+                                            <br/> TIME OF ARRIVAL
+                                        </td>
+                                        <td class="td-small-content center">
+                                            <!-- 5.    ESTIMATED DATE AND TIME OF ARRIVAL: to be typed in manually by client -->
+                                        </td>
+                                        <td class="times td-am-content">
+                                            <div>
+                                                <div class="box"/> AM
+                                                </div>
+                                            <div>
+                                                <div class="box"/> PM
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="shipper-section">
+                                <table data-page="1" data-table="1">
+                                    <tr class="head-title">
+                                        <td colspan="2" class="hr-title">
+                                            SHIPPER INFORMATION
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                STATE LICENSE #
+                                        </td>
+                                        <td class="td-content thin">
+                                            STATE LICENSE #
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                TYPE OF LICENSE
+                                        </td>
+                                        <td class="td-content thin">
+                                            TYPE OF LICENSE
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                BUSINESS NAME
+                                        </td>
+                                        <td class="td-content thin">
+                                            <span t-field="o.partner_id"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                BUSINESS ADDRESS
+                                        </td>
+                                        <td class="td-content thin">
+                                            <span t-field="o.partner_id.street"/>
+                                            <span t-field="o.partner_id.street2"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                CITY, STATE, ZIP CODE
+                                            </td>
+                                        <td class="td-content thin">
+                                            <span t-field="o.partner_id.city"/>
+                                            <span>,</span>
+                                            <span t-field="o.partner_id.state_id.name"/>
+                                            <span>,</span>
+                                            <span t-field="o.partner_id.zip"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                            PHONE NUMBER
+                                        </td>
+                                        <td class="td-content thin">
+                                            <span t-field="o.partner_id.phone"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                            Contact Name
+                                        </td>
+                                        <td class="td-content thin">
+                                            Employee:
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="receiver-section">
+                                <table data-page="1" data-table="1">
+                                    <tr class="head-title">
+                                        <td colspan="2" class="hr-title">
+                                                RECEIVER INFORMATION
+                                            </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                STATE LICENSE #
+                                        </td>
+                                        <td class="td-content thin">
+                                                STATE LICENSE #
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                TYPE OF LICENSE
+                                        </td>
+                                        <td class="td-content thin">
+                                                TYPE OF LICENSE
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                BUSINESS NAME
+                                        </td>
+                                        <td class="td-content thin">
+                                            <span t-field="o.sale_id.partner_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                BUSINESS ADDRESS
+                                        </td>
+                                        <td class="td-content thin">
+                                            <span t-field="o.sale_id.partner_id.street"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                CITY, STATE, ZIP CODE
+                                        </td>
+                                        <td class="td-content thin">
+                                            <span t-field="o.sale_id.partner_id.city"/>
+                                            <span t-field="o.sale_id.partner_id.state_id.name"/>
+                                            <span t-field="o.sale_id.partner_id.zip"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                PHONE NUMBER
+                                        </td>
+                                        <td class="td-content thin">
+                                            <span t-field="o.sale_id.partner_id.phone"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                Contact Name
+                                        </td>
+                                        <td class="td-content thin">
+                                            <span t-field="o.sale_id.partner_id"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="shipper-section">
+                                <table data-page="1" data-table="1">
+                                    <tr class="head-title">
+                                        <td colspan="2" class="hr-title">
+                                                DISTRIBUTOR INFORMATION
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                STATE LICENSE #
+                                        </td>
+                                        <td class="td-content thin">
+                                                STATE LICENSE #
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                TYPE OF LICENSE
+                                        </td>
+                                        <td class="td-content thin">
+                                                TYPE OF LICENSE
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                BUSINESS NAME
+                                        </td>
+                                        <td class="td-content thin">
+                                            <span t-field="o.partner_id"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                BUSINESS ADDRESS
+                                        </td>
+                                        <td class="td-content thin">
+                                            <span t-field="o.partner_id.street"/>
+                                            <span t-field="o.partner_id.street2"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                CITY, STATE, ZIP CODE
+                                            </td>
+                                        <td class="td-content thin">
+                                            <span t-field="o.partner_id.city"/>
+                                            <span>,</span>
+                                            <span t-field="o.partner_id.state_id.name"/>
+                                            <span>,</span>
+                                            <span t-field="o.partner_id.zip"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                            PHONE NUMBER
+                                        </td>
+                                        <td class="td-content thin">
+                                            <span t-field="o.partner_id.phone"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="receiver-section">
+                                <table data-page="1" data-table="1">
+                                    <tr class="head-title">
+                                        <td colspan="3" class="hr-title">
+                                                DISTRIBUTOR INFORMATION
+                                            </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                Driver's Name
+                                            </td>
+                                        <td class="td-content thin" colspan="2">
+                                            <!-- <span t-field="o.partner_id"/> -->
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                CA Driver's License #
+                                            </td>
+                                        <td class="td-content thin" colspan="2">
+                                            <!-- <span t-field="o.partner_id"/> -->
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                Vehicle Make
+                                            </td>
+                                        <td class="td-content thin" colspan="2"/>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                Vehicle Model
+                                            </td>
+                                        <td class="td-content thin" colspan="2"/>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title thin">
+                                                Vehicle Lic. Plate #
+                                            </td>
+                                        <td class="td-content thin" colspan="2"/>
+                                    </tr>
+                                    <tr class="tr-title">
+                                        <td class="td-title">Actual DATE AND 
+                                            <br/> TIME OF ARRIVAL
+                                        </td>
+                                        <td class="td-small-content center">
+                                        </td>
+                                        <td class="times td-am-content">
+                                            <div>
+                                                <div class="box"/> AM
+                                                </div>
+                                            <div>
+                                                <div class="box"/> PM
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="table-wrapper">
+                            <div id="general-section">
+                                <table data-page="1" data-table="1">
+                                    <tr class="tr-title">
+                                        <td class="td-title td-title-header">INVOICE/MANIFEST NUMBER:</td>
+                                        <td colspan="3" class="td-content">
+                                            <span t-field="sale_id.name"/>
+                                            <span>-</span>
+                                            <span t-field="o.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="delivery-section">
+                                <table data-page="1" data-table="1">
+                                    <tr class="tr-title">
+                                        <td class="td-title td-title-header">PAGE</td>
+                                        <td class="center td-third-content"> </td>
+                                        <td class="center">OF</td>
+                                        <td class="center td-third-content"> </td>
+                                        <td class="center td-third-content">Total Page: &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- <table class="product-section" t-if="o.move_line_ids and o.state=='done'"> -->
+                        <table class="product-section" t-if="o.move_line_ids">
+                            <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')" groups="stock.group_production_lot"/>
+                            <thead class="td-title-header">
+                                <tr>
+                                    <th colspan="9" class="td-title td-title-header thin" style="text-align: center; vertical-align: middle;">
+                                        PRODUCT SHIPPED DETAILS <br/>
+                                        SHIPPER COMPLETES ALL THE UNSHADED COLUMNS BELOW. RECEIVER COMPLETES ONLY THE SHADED COLUMNS BELOW <br/>
+                                        (Please attach additional pages, if needed)
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th t-if="has_serial_number" name="lot_serial" class="td-title td-title-header thin" style="text-align: center; vertical-align: middle;">
+                                        Lot Number
+                                    </th>
+                                    <th class="td-title td-title-header thin" style="text-align: center; vertical-align: middle;">
+                                        <strong>Product</strong>
+                                    </th>
+                                    <th class="td-title td-title-header thin" style="text-align: center; vertical-align: middle;">
+                                        <strong>QTY ORDERED</strong>
+                                    </th>
+                                    <th class="td-title td-title-header thin" style="text-align: center; vertical-align: middle; background-color: #BFBFBF;">
+                                        <strong>QTY RECEIVED</strong>
+                                    </th>
+                                    <th class="td-title td-title-header thin" style="text-align: center; vertical-align: middle;">
+                                        <strong>UNIT COST</strong>
+                                    </th>
+                                    <th class="td-title td-title-header thin" style="text-align: center; vertical-align: middle;">
+                                        <strong>TOTAL COST</strong>
+                                    </th>
+                                    <th colspan="2" class="r td-tile-header" style="background-color: #BFBFBF;">
+                                        <table style="border: none; margin-bottom: -2px; width: 100%;" class="td-title-header">
+                                            <thead class="td-title-header">
+                                                <th class="td-title-header thin" colspan="2" style="border: none; border-bottom: 1px solid #000000; text-align: center;background-color: #BFBFBF;">
+                                                    <strong>RETAIL ONLY</strong>
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                <td class="td-title-header thin" style="border: none; text-align: center; padding-right: 14px;background-color: #BFBFBF;">
+                                                    UNIT RETAIL VALUE
+                                                </td>
+                                                <td class="td-title-header thin" style="border: none; text-align: center; border-left: 1px solid #000000;background-color: #BFBFBF;">
+                                                    TOTAL RETAIL VALUE
+                                                </td>
+                                            </tbody>
+                                        </table>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.move_line_ids" t-as="move_line">
+                                    <t t-if="has_serial_number">
+                                        <td class="td-contentprod thin">
+                                            <table width="100%">
+                                                <tr>
+                                                    <div>
+                                                        <span t-field="move_line.lot_id"/>
+                                                        <t t-if="not move_line.lot_id">
+                                                            <span t-field="move_line.lot_name"/>
+                                                        </t>
+                                                    </div>
+                                                    <div name="lot_qty">
+                                                        <t t-if="move_line.product_qty">
+                                                            <span t-field="move_line.product_qty"/>
+                                                        </t>
+                                                    </div>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </t>
+                                    <td class="td-contentprod-name  thin" style="padding-top: 10px;">
+                                        <span t-field="move_line.product_id"/>
+                                        <p t-if="o.picking_type_code == 'outgoing'">
+                                            <span t-field="move_line.product_id.sudo().description_pickingout"/>
+                                        </p>
+                                        <p t-if="o.picking_type_code == 'incoming'">
+                                            <span t-field="move_line.product_id.sudo().description_pickingin"/>
+                                        </p>
+                                    </td>
+                                    <td class="td-contentprod  thin">
+                                        <span t-field="move_line.qty_done"/>
+                                        <span t-field="move_line.product_uom_id"/>
+                                    </td>
+                                    <td class="td-contentprod  thin" style="background-color: #BFBFBF"/>
+                                    <td class="td-contentprod  thin">
+                                        <span t-esc="'{0:,.2f}'.format(move_line.move_id.sale_line_id.price_unit)"/>
+                                    </td>
+                                    <td class="td-contentprod  thin">
+                                        <span t-esc="'{0:,.2f}'.format(move_line.move_id.sale_line_id.price_unit*move_line.qty_done)"/>
+                                    </td>
+                                    <td class="td-contentprod  thin" style="background-color: #BFBFBF; width: 10em;"/>
+                                    <td class="td-contentprod  thin" style="background-color: #BFBFBF;  width: 10em;"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="subtotal">
+                            Subtotal: <spant t-esc="'{0:,.2f}'.format(sale_id.amount_untaxed)"/>
+                            <br/>
+                            Tax: <span t-esc="'{0:,.2f}'.format(sale_id.amount_tax)"/>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="table-wrapper">
+                            <div id="general-section">
+                                <table data-page="1" data-table="1">
+                                    <tr class="tr-title">
+                                        <td class="td-title td-title-header">INVOICE/MANIFEST NUMBER</td>
+                                        <td colspan="3" class="td-content">
+                                            <span t-field="sale_id.name"/>
+                                            <span>-</span>
+                                            <span t-field="o.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="delivery-section">
+                                <table data-page="1" data-table="1">
+                                    <tr class="tr-title">
+                                        <td class="td-title td-title-header">PAGE</td>
+                                        <td class="center td-third-content"> </td>
+                                        <td class="center td-third-content">OF</td>
+                                        <td class="center td-third-content"> </td>
+                                        <td class="center td-third-content">Total Page: &amp;nbsp;&amp;nbsp;</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="full-section" style="page-break-after:always">
+                            <table data-page="1" data-table="1">
+                                <tr class="head-title">
+                                    <td colspan="4" class="hr-title">
+                                        PRODUCT REJECTION
+                                    </td>
+                                </tr>
+                                <tr class="head-title">
+                                    <td colspan="4" class="hr-title">
+                                        IF PRODUCTS ARE REJECTED PLEASE CIRCLE THE ITEMS BEING REJECTED IN THE PRODUCT SHIPPING DETAILS SECTION
+                                    </td>
+                                </tr>
+                                <tr class="tr-title">
+                                    <td colspan="1" class="td-title thin">
+                                        REASON FOR REJECTION
+                                    </td>
+                                    <td colspan="3" class="td-content thin"/>
+                                </tr>
+                                <tr class="hr-title">
+                                    <td colspan="4" class="td-title thin">
+                                        I CONFIRM THAT THE CONTENTS OF THIS SHIPMENT MATCH IN WEIGHT AND COUNT AS INDICATED ABOVE. I AGREE TO TAKECUSTODY OF ALL ITEMS AS INDICATED RECEIVED ABOVE - AND WHICH ARE NOT CIRCLED. THE PRODUCTS CIRCLED ABOVE AREREJECTED FOR DELIVERY AND REMAIN IN THE CUSTODY OF THE DISTRIBUTOR FOR RETURN TO THE SHIPPER AS INDICATED ONTHIS FORM.
+                                    </td>
+                                </tr>
+                                <tr class="tr-title">
+                                    <td class="td-content thin" style="padding-top: 5px; padding-bottom: 5px;" colspan="2">
+                                        THIS PRODUCT DETAILS ATTACHMENT PAGE IS ATTACHED TO INVOICE #
+                                    </td>
+                                    <td class="td-title thin" colspan="2"/>
+                                </tr>
+                                <tr class="tr-title">
+                                    <td class="td-content thin">
+                                        NAME OF PERSON RECEIVING AND/ORREJECTING PRODUCT:
+                                    </td>
+                                    <td class="td-content thin"/>
+                                    <td class="td-title thin">
+                                        PHONE NUMBER
+                                    </td>
+                                    <td class="td-title thin"/>
+                                </tr>
+                                <tr class="tr-title">
+                                    <td class="td-content thin">
+                                        SIGNATURE OF PERSON RECEIVING AND/ORREJECTING PRODUCT:
+                                    </td>
+                                    <td class="td-content thin"/>
+                                    <td class="td-title thin">
+                                        DATE SIGNED
+                                    </td>
+                                    <td class="td-title thin"/>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <report
+        string="Shipping Manifest"
+        id="action_report_shipping_manifest"
+        model="stock.picking"
+        report_type="qweb-pdf"
+        name="apex_shipping_manifest.report_shipping_manifest"
+        file="apex_shipping_manifest.report_shipping_manifest"
+        print_report_name="'Shipping Manifest-%s-%s' % (object.partner_id.name or '', object.name)"
+        paperformat="apex_shipping_manifest.paperformat_shipping_manifest"
+    />
+
+</odoo>
