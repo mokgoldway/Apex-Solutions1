@@ -63,7 +63,7 @@ Shipping Manifest
     'website': "https://www.odoo.com",
     'category': 'Custom',
     'version': '0.1',
-    'depends': ['sale', 'sale_stock', 'hr', 'fleet'],
+    'depends': ['sale_management', 'sale_stock', 'hr', 'fleet'],
     'data': [
         'report/shipping_manifest_report_view.xml',
     ],

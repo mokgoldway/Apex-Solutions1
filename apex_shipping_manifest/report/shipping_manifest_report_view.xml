@@ -248,7 +248,7 @@
                                                 STATE LICENSE #
                                         </td>
                                         <td class="td-content thin">
-                                            STATE LICENSE #
+                                            <span t-field="o.partner_id.x_studio_state_license_no"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -256,7 +256,7 @@
                                                 TYPE OF LICENSE
                                         </td>
                                         <td class="td-content thin">
-                                            TYPE OF LICENSE
+                                            <span t-field="o.partner_id.x_studio_type_of_license"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -311,14 +311,14 @@
                                     <tr class="head-title">
                                         <td colspan="2" class="hr-title">
                                                 RECEIVER INFORMATION
-                                            </td>
+                                        </td>
                                     </tr>
                                     <tr class="tr-title">
                                         <td class="td-title thin">
                                                 STATE LICENSE #
                                         </td>
                                         <td class="td-content thin">
-                                                STATE LICENSE #
+                                            <span t-field="sale_id.partner_shipping_id.x_studio_state_license_no"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -326,7 +326,7 @@
                                                 TYPE OF LICENSE
                                         </td>
                                         <td class="td-content thin">
-                                                TYPE OF LICENSE
+                                            <span t-field="sale_id.partner_shipping_id.x_studio_type_of_license"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -334,7 +334,7 @@
                                                 BUSINESS NAME
                                         </td>
                                         <td class="td-content thin">
-                                            <span t-field="o.sale_id.partner_id.name"/>
+                                            <span t-field="sale_id.partner_shipping_id"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -342,7 +342,7 @@
                                                 BUSINESS ADDRESS
                                         </td>
                                         <td class="td-content thin">
-                                            <span t-field="o.sale_id.partner_id.street"/>
+                                            <span t-field="sale_id.partner_shipping_id.street"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -350,9 +350,9 @@
                                                 CITY, STATE, ZIP CODE
                                         </td>
                                         <td class="td-content thin">
-                                            <span t-field="o.sale_id.partner_id.city"/>
-                                            <span t-field="o.sale_id.partner_id.state_id.name"/>
-                                            <span t-field="o.sale_id.partner_id.zip"/>
+                                            <span t-field="sale_id.partner_shipping_id.city"/>
+                                            <span t-field="sale_id.partner_shipping_id.state_id.name"/>
+                                            <span t-field="sale_id.partner_shipping_id.zip"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -360,7 +360,7 @@
                                                 PHONE NUMBER
                                         </td>
                                         <td class="td-content thin">
-                                            <span t-field="o.sale_id.partner_id.phone"/>
+                                            <span t-field="sale_id.partner_shipping_id.phone"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -368,7 +368,7 @@
                                                 Contact Name
                                         </td>
                                         <td class="td-content thin">
-                                            <span t-field="o.sale_id.partner_id"/>
+                                            <span t-field="sale_id.partner_id"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -385,7 +385,7 @@
                                                 STATE LICENSE #
                                         </td>
                                         <td class="td-content thin">
-                                                STATE LICENSE #
+                                            <span t-field="o.partner_id.x_studio_state_license_no"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -393,7 +393,7 @@
                                                 TYPE OF LICENSE
                                         </td>
                                         <td class="td-content thin">
-                                                TYPE OF LICENSE
+                                            <span t-field="o.partner_id.x_studio_type_of_license"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -439,13 +439,13 @@
                                 <table data-page="1" data-table="1">
                                     <tr class="head-title">
                                         <td colspan="3" class="hr-title">
-                                                DISTRIBUTOR INFORMATION
-                                            </td>
+                                            DISTRIBUTOR INFORMATION
+                                        </td>
                                     </tr>
                                     <tr class="tr-title">
                                         <td class="td-title thin">
-                                                Driver's Name
-                                            </td>
+                                            Driver's Name
+                                        </td>
                                         <td class="td-content thin" colspan="2">
                                             <!-- <span t-field="o.partner_id"/> -->
                                         </td>
@@ -521,8 +521,8 @@
                                 </table>
                             </div>
                         </div>
-                        <!-- <table class="product-section" t-if="o.move_line_ids and o.state=='done'"> -->
-                        <table class="product-section" t-if="o.move_line_ids">
+                        <table class="product-section" t-if="o.move_line_ids and o.state=='done'">
+                        <!-- <table class="product-section" t-if="o.move_line_ids"> -->
                             <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')" groups="stock.group_production_lot"/>
                             <thead class="td-title-header">
                                 <tr>
@@ -533,11 +533,11 @@
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th t-if="has_serial_number" name="lot_serial" class="td-title td-title-header thin" style="text-align: center; vertical-align: middle;">
-                                        Lot Number
+                                    <th name="uid_tag_number" class="td-title td-title-header thin" style="text-align: center; vertical-align: middle;">
+                                        UID TAG NUMBER
                                     </th>
                                     <th class="td-title td-title-header thin" style="text-align: center; vertical-align: middle;">
-                                        <strong>Product</strong>
+                                        <strong>ITEM NAME AND PRODUCT DESCRIPTION</strong>
                                     </th>
                                     <th class="td-title td-title-header thin" style="text-align: center; vertical-align: middle;">
                                         <strong>QTY ORDERED</strong>
@@ -572,25 +572,26 @@
                             </thead>
                             <tbody>
                                 <tr t-foreach="o.move_line_ids" t-as="move_line">
-                                    <t t-if="has_serial_number">
-                                        <td class="td-contentprod thin">
-                                            <table width="100%">
-                                                <tr>
-                                                    <div>
-                                                        <span t-field="move_line.lot_id"/>
-                                                        <t t-if="not move_line.lot_id">
-                                                            <span t-field="move_line.lot_name"/>
-                                                        </t>
-                                                    </div>
-                                                    <div name="lot_qty">
-                                                        <t t-if="move_line.product_qty">
-                                                            <span t-field="move_line.product_qty"/>
-                                                        </t>
-                                                    </div>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </t>
+                                    <!-- <t t-if="has_serial_number"> -->
+                                    <td class="td-contentprod thin">
+                                        <span t-field="move_line.product_id.x_studio_uid_tag_number"/>
+                                        <!-- <table width="100%">
+                                            <tr>
+                                                <div>
+                                                    <span t-field="move_line.lot_id"/>
+                                                    <t t-if="not move_line.lot_id">
+                                                        <span t-field="move_line.lot_name"/>
+                                                    </t>
+                                                </div>
+                                                <div name="lot_qty">
+                                                    <t t-if="move_line.product_qty">
+                                                        <span t-field="move_line.product_qty"/>
+                                                    </t>
+                                                </div>
+                                            </tr>
+                                        </table> -->
+                                    </td>
+                                    <!-- </t> -->
                                     <td class="td-contentprod-name  thin" style="padding-top: 10px;">
                                         <span t-field="move_line.product_id"/>
                                         <p t-if="o.picking_type_code == 'outgoing'">
