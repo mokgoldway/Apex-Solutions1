@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_form_inherit_metrc" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.metrc</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='validity_date']" position="before">
+                <field name="company_license_id" required="1" widget="selection"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="license_partner" invisible="1"/>
+                <field name="customer_license_id"
+                        domain="[('partner_id', 'child_of', partner_id)]"
+                        options="{'no_create': True, 'no_edit': True}"
+                        attrs="{'required': [('license_partner', '!=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

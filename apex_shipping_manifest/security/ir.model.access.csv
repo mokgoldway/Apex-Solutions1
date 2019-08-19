@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_metrc_license_user,access_metrc_license_user,model_metrc_license,base.group_user,1,1,1,0
+access_metrc_license_sale_manager,access_metrc_license_manager,model_metrc_license,sales_team.group_sale_manager,1,1,1,1
+access_metrc_license_stock_manager,access_metrc_license_manager,model_metrc_license,stock.group_stock_manager,1,1,1,1

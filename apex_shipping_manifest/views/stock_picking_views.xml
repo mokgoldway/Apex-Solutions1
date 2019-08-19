@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_stock_picking_form_inherit_metrc" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.metrc</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='scheduled_date']" position="before">
+                    <field name="company_license_id" widget="selection"/>
+                    <field name="driver_id"
+                            attrs="{'required': [('license_partner', '!=', False),('picking_type_code', '=', 'outgoing')]}"
+                            context="{'default_drive': 1}"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="license_partner" invisible="1"/>
+                    <field name="customer_license_id" 
+                            domain="[('partner_id', 'child_of', partner_id)]"
+                            options="{'no_create': True, 'no_edit': True}"
+                            attrs="{'required': [('license_partner', '!=', False),('picking_type_code', '=', 'outgoing')]}"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

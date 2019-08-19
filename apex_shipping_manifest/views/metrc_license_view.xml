@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_metrc_license_tree" model="ir.ui.view">
+            <field name="name">metrc.license.tree</field>
+            <field name="model">metrc.license</field>
+            <field name="arch" type="xml">
+                <tree string="Licenses">
+                    <field name="name"/>
+                    <field name="license_type"/>
+
+                    <field name="issue_date"/>
+                    <field name="expire_date"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_metrc_license_search" model="ir.ui.view">
+            <field name="name">metrc.license.search</field>
+            <field name="model">metrc.license</field>
+            <field name="arch" type="xml">
+                <search string="License">
+                    <field name="name" string="License"/>
+                    <field name="license_type"/>
+                    <field name="partner_id"/>
+                    <field name="issuer_id"/>
+                    <filter string="Expired" name="expired_licenses" domain="[('expire_date', '&lt;', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter string="Not Active" name="archieved_licenses" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_metrc_license_form" model="ir.ui.view">
+            <field name="name">metrc.license.form</field>
+            <field name="model">metrc.license</field>
+            <field name="arch" type="xml">
+                <form string="License">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "active"}'/>
+                            </button>
+                        </div>
+
+                        <div class="oe_title" name="title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                            <field name="base_type" widget="radio" class="oe_edit_only" options="{'horizontal': true}"/>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="license_number"/>
+                                <field name="partner_id" context="{'default_license_partner': True, 'default_customer': True}"/>
+                                <field name="issuer_id" context="{'default_customer': True, 'default_supplier': True}"/>
+                            </group>
+                            <group>
+                                <field name="license_type"/>
+                                <field name="issue_date" attrs="{'required': [('base_type', '=', 'Internal')]}"/>
+                                <field name="expire_date" attrs="{'required': [('base_type', '=', 'Internal')]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_view_metrc_license">
+            <field name="name">All Licenses</field>
+            <field name="res_model">metrc.license</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="search_view_id" ref="view_metrc_license_search"/>
+            <field name="help" type="html">
+                <p>
+                    You will be able to create and manage mutiple metrc licenses.
+                </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_metrc_customer_license">
+            <field name="name">Customer Licenses</field>
+            <field name="res_model">metrc.license</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('base_type', '=', 'External')]</field>
+            <field name="context">{'default_base_type': 'External'}</field>
+            <field name="search_view_id" ref="view_metrc_license_search"/>
+            <field name="help" type="html">
+                <p>
+                    You will be able to create and manage mutiple metrc licenses.
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="menu_metrc_license"
+                name="Cannabis"
+                parent="sale.menu_sale_config"
+                sequence="100"/>
+
+        <menuitem id="menu_action_view_metrc_customer_license"
+                action="action_view_metrc_license"
+                name="Licenses"
+                parent="menu_metrc_license"
+                sequence="1"/>
+
+
+    </data>
+</odoo>

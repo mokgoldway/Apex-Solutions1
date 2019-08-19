@@ -65,6 +65,19 @@ Shipping Manifest
     'version': '0.1',
     'depends': ['sale_management', 'sale_stock', 'hr', 'fleet'],
     'data': [
+        # DATA
+        'data/paperformat_data.xml',
+        # security
+        'security/ir.model.access.csv',
+
+        # VIEWS
+        'views/metrc_license_view.xml',
+        'views/stock_picking_views.xml',
+        'views/partner_view.xml',
+        'views/sale_views.xml',
+        'views/company_view.xml',
+
+        # REPORT
         'report/shipping_manifest_report_view.xml',
     ],
     'demo': [

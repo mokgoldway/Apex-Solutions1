@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="company_view_buttons">
+            <field name="name">company.view.buttons</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form" />
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//*[hasclass('o_address_format')]" position="after">
+                        <field name="default_license_id" widget="selection"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
