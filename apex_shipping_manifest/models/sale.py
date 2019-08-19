@@ -7,7 +7,6 @@ from odoo.exceptions import UserError
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-
     @api.model
     def _default_company_license_id(self):
         return self.env.user.company_id.default_license_id.id \
@@ -25,7 +24,6 @@ class SaleOrder(models.Model):
                                             domain='[("base_type", "=", "External")]',
                                             readonly=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
                                             index=True, track_visibility='always')
-
 
     @api.multi
     def action_confirm(self):
@@ -49,7 +47,6 @@ class SaleOrder(models.Model):
         self.company_license_id = self.warehouse_id.company_id.default_license_id \
                                     if self.warehouse_id and self.warehouse_id.company_id.default_license_id \
                                     else False
-
 
     @api.onchange('partner_id')
     def onchange_partner_id(self):

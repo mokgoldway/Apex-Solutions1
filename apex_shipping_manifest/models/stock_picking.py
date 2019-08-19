@@ -7,7 +7,6 @@ from odoo.exceptions import UserError
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-
     @api.model
     def _default_company_license_id(self):
         return self.env.user.company_id.default_license_id.id \
