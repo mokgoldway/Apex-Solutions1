@@ -301,7 +301,7 @@
                                                 STATE LICENSE #
                                         </td>
                                         <td class="td-content thin">
-                                            <span t-field="sale_id.partner_shipping_id.x_studio_state_license_no"/>
+                                            <span t-field="o.partner_id.x_studio_state_license_no"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -309,7 +309,7 @@
                                                 TYPE OF LICENSE
                                         </td>
                                         <td class="td-content thin">
-                                            <span t-field="sale_id.partner_shipping_id.x_studio_type_of_license"/>
+                                            <span t-field="o.partner_id.x_studio_type_of_license"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -317,7 +317,7 @@
                                                 BUSINESS NAME
                                         </td>
                                         <td class="td-content thin">
-                                            <span t-field="sale_id.partner_shipping_id"/>
+                                            <span t-field="o.partner_id"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -325,7 +325,7 @@
                                                 BUSINESS ADDRESS
                                         </td>
                                         <td class="td-content thin">
-                                            <span t-field="sale_id.partner_shipping_id.street"/>
+                                            <span t-field="o.partner_id.street"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -333,9 +333,9 @@
                                                 CITY, STATE, ZIP CODE
                                         </td>
                                         <td class="td-content thin">
-                                            <span t-field="sale_id.partner_shipping_id.city"/>
-                                            <span t-field="sale_id.partner_shipping_id.state_id.name"/>
-                                            <span t-field="sale_id.partner_shipping_id.zip"/>
+                                            <span t-field="o.partner_id.city"/>
+                                            <span t-field="o.partner_id.state_id.name"/>
+                                            <span t-field="o.partner_id.zip"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -343,7 +343,7 @@
                                                 PHONE NUMBER
                                         </td>
                                         <td class="td-content thin">
-                                            <span t-field="sale_id.partner_shipping_id.phone"/>
+                                            <span t-field="o.partner_id.phone"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
@@ -351,7 +351,7 @@
                                                 Contact Name
                                         </td>
                                         <td class="td-content thin">
-                                            <span t-field="sale_id.partner_id"/>
+                                            <span t-field="o.partner_id"/>
                                         </td>
                                     </tr>
                                 </table>

@@ -62,7 +62,7 @@ Shipping Manifest
     'author': "Odoo Inc",
     'website': "https://www.odoo.com",
     'category': 'Custom',
-    'version': '1.0',
+    'version': '0.1',
     'depends': ['sale_management', 'sale_stock', 'hr', 'fleet'],
     'data': [
         # DATA
