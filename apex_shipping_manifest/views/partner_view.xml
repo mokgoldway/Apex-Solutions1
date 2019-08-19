@@ -23,8 +23,6 @@
                     </xpath>
                     <field name='vat' position="after">
                         <field name="license_partner"/>
-                        <field name="driver"/>
-                        <field name="dl_number" attrs="{'required': [('driver', '=', True)], 'invisible': [('driver', '=', False)]}"/>
                     </field>
                 </data>
             </field>

@@ -14,8 +14,6 @@ class Partner(models.Model):
         string='Licenses')
     license_partner = fields.Boolean(string='Cannabis Licensed Contact')
     license_count = fields.Integer(compute='_compute_license_count', string="License Count")
-    driver = fields.Boolean(string='Driver')
-    dl_number = fields.Char(string='Drivers License Number')
 
     @api.depends('license_ids')
     def _compute_license_count(self):

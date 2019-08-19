@@ -24,8 +24,7 @@ class StockPicking(models.Model):
                                             domain='[("base_type", "=", "External")]',
                                             ondelete='restrict', copy=False,  index=True,
                                             states={'done': [('readonly', True)], 'cancel': [('readonly', True)]})
-    driver_id = fields.Many2one(comodel_name='res.partner', string='Driver',
-                                            domain='[("driver", "=", True)]',
+    driver_id = fields.Many2one(comodel_name='hr.employee', string='Driver',
                                             ondelete='restrict', copy=False,  index=True,
                                             states={'done': [('readonly', True)], 'cancel': [('readonly', True)]})
 

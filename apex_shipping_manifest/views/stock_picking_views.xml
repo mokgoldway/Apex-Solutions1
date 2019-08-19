@@ -9,8 +9,7 @@
                 <xpath expr="//field[@name='scheduled_date']" position="before">
                     <field name="company_license_id" widget="selection"/>
                     <field name="driver_id"
-                            attrs="{'required': [('license_partner', '!=', False),('picking_type_code', '=', 'outgoing')]}"
-                            context="{'default_drive': 1}"/>
+                            attrs="{'required': [('picking_type_code', '=', 'outgoing')]}"/>
                 </xpath>
                 <xpath expr="//field[@name='partner_id']" position="after">
                     <field name="license_partner" invisible="1"/>

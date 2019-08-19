@@ -284,7 +284,7 @@
                                             Contact Name
                                         </td>
                                         <td class="td-content thin">
-                                            <span t-field="o.company_id.name"/>
+                                            <span t-field="o.driver_id"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -436,7 +436,7 @@
                                                 CA Driver's License #
                                             </td>
                                         <td class="td-content thin" colspan="2">
-                                            <span t-field="o.driver_id.dl_number"/>
+                                            <span t-field="o.driver_id.x_studio_drivers_license_no_1"/>
                                         </td>
                                     </tr>
                                     <tr class="tr-title">
