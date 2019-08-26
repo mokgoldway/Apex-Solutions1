@@ -10,6 +10,8 @@
                     <field name="company_license_id" widget="selection"/>
                     <field name="driver_id"
                             attrs="{'required': [('picking_type_code', '=', 'outgoing')]}"/>
+                    <field name="vehicle_model_id"
+                            attrs="{'required': [('picking_type_code', '=', 'outgoing')]}"/>
                 </xpath>
                 <xpath expr="//field[@name='partner_id']" position="after">
                     <field name="license_partner" invisible="1"/>

@@ -443,19 +443,25 @@
                                         <td class="td-title thin">
                                                 Vehicle Make
                                             </td>
-                                        <td class="td-content thin" colspan="2"/>
+                                        <td class="td-content thin" colspan="2">
+                                            <span t-field="o.vehicle_model_id.brand_id"/>
+                                        </td>
                                     </tr>
                                     <tr class="tr-title">
                                         <td class="td-title thin">
                                                 Vehicle Model
                                             </td>
-                                        <td class="td-content thin" colspan="2"/>
+                                        <td class="td-content thin" colspan="2">
+                                            <span t-field="o.vehicle_model_id"/>
+                                        </td>
                                     </tr>
                                     <tr class="tr-title">
                                         <td class="td-title thin">
                                                 Vehicle Lic. Plate #
                                             </td>
-                                        <td class="td-content thin" colspan="2"/>
+                                        <td class="td-content thin" colspan="2">
+                                            <span t-field="o.vehicle_model_id.license_plate"/>
+                                        </td>
                                     </tr>
                                     <tr class="tr-title">
                                         <td class="td-title">Actual DATE AND 

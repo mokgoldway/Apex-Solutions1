@@ -27,6 +27,9 @@ class StockPicking(models.Model):
     driver_id = fields.Many2one(comodel_name='hr.employee', string='Driver',
                                             ondelete='restrict', copy=False,  index=True,
                                             states={'done': [('readonly', True)], 'cancel': [('readonly', True)]})
+    vehicle_model_id = fields.Many2one(comodel_name='fleet.vehicle', string='Vehicle',
+                                            ondelete='restrict', copy=False,  index=True,
+                                            states={'done': [('readonly', True)], 'cancel': [('readonly', True)]})
 
     @api.onchange('company_id')
     def onchange_company_id(self):
