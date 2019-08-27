@@ -96,7 +96,9 @@
                     font-size: 11px;
                 }
                 .thin {
+                    min-height: 1em !important;
                     height: 1em !important;
+                    max-height: 2em !important;
                 }
                 .center {
                     text-align: center;
@@ -590,57 +592,48 @@
                                         <span t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>
                                     </td>
                                 </tr>
+                                <!-- <tr>
+                                    <th rowspan="2" colspan="6"/>
+                                    <th class="td-title td-title-header text-right thin" style="background-color: #BFBFBF; vertical-align: middle;">
+                                        <span>Subtotal:</span>
+                                    </th>
+                                    <td class="td-contentprod thin" style="width: 10em;">
+                                        <spant t-esc="'{0:,.2f}'.format(sale_id.amount_untaxed)"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="td-title td-title-header text-right thin" style="background-color: #BFBFBF; vertical-align: middle;">
+                                        <span>Tax:</span>
+                                    </th>
+                                    <td class="td-contentprod thin" style="width: 10em;">
+                                        <span t-esc="'{0:,.2f}'.format(sale_id.amount_tax)"/>
+                                    </td>
+                                </tr> -->
                             </tbody>
                         </table>
-                        <div class="subtotal">
-                            Subtotal: <spant t-esc="'{0:,.2f}'.format(sale_id.amount_untaxed)"/>
-                            <br/>
-                            Tax: <span t-esc="'{0:,.2f}'.format(sale_id.amount_tax)"/>
-                        </div>
-                    </div>
-                    <div class="page">
-                        <div class="table-wrapper">
-                            <div id="general-section">
-                                <table data-page="1" data-table="1">
-                                    <tr class="tr-title">
-                                        <td class="td-title td-title-header">INVOICE/MANIFEST NUMBER</td>
-                                        <td colspan="3" class="td-content">
-                                            <span t-field="sale_id.name"/>
-                                            <span>-</span>
-                                            <span t-field="o.name"/>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div id="delivery-section">
-                                <table data-page="1" data-table="1">
-                                    <tr class="tr-title">
-                                        <td class="td-title td-title-header">PAGE</td>
-                                        <td class="center td-third-content"> </td>
-                                        <td class="center td-third-content">OF</td>
-                                        <td class="center td-third-content"> </td>
-                                        <td class="center td-third-content">Total Page: &amp;nbsp;&amp;nbsp;</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="full-section" style="page-break-after:always">
+                        <!-- <div class="full-section" style="page-break-after:always"> -->
+                        <div class="full-section">
                             <table data-page="1" data-table="1">
                                 <tr class="head-title">
-                                    <td colspan="4" class="hr-title">
+                                    <td colspan="4" class="hr-title" style="text-align: center;">
                                         PRODUCT REJECTION
                                     </td>
                                 </tr>
-                                <tr class="head-title">
-                                    <td colspan="4" class="hr-title">
+                                <tr class="tr-title">
+                                    <td colspan="4" class="td-content thin" style="padding-top: 5px; padding-bottom: 5px;">
                                         IF PRODUCTS ARE REJECTED PLEASE CIRCLE THE ITEMS BEING REJECTED IN THE PRODUCT SHIPPING DETAILS SECTION
                                     </td>
                                 </tr>
                                 <tr class="tr-title">
-                                    <td colspan="1" class="td-title thin">
+                                    <td colspan="1" class="td-title" style="height:4em;">
                                         REASON FOR REJECTION
                                     </td>
-                                    <td colspan="3" class="td-content thin"/>
+                                    <td colspan="3" class="td-content" style="height:4em;"/>
+                                </tr>
+                                <tr class="head-title">
+                                    <td colspan="4" class="hr-title" style="text-align: center;">
+                                        PRODUCT RECEIPT CONFIRMATION
+                                    </td>
                                 </tr>
                                 <tr class="hr-title">
                                     <td colspan="4" class="td-title thin">
@@ -676,6 +669,33 @@
                             </table>
                         </div>
                     </div>
+                    <!-- <div class="page">
+                        <div class="table-wrapper">
+                            <div id="general-section">
+                                <table data-page="1" data-table="1">
+                                    <tr class="tr-title">
+                                        <td class="td-title td-title-header">INVOICE/MANIFEST NUMBER</td>
+                                        <td colspan="3" class="td-content">
+                                            <span t-field="sale_id.name"/>
+                                            <span>-</span>
+                                            <span t-field="o.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="delivery-section">
+                                <table data-page="1" data-table="1">
+                                    <tr class="tr-title">
+                                        <td class="td-title td-title-header">PAGE</td>
+                                        <td class="center td-third-content"> </td>
+                                        <td class="center td-third-content">OF</td>
+                                        <td class="center td-third-content"> </td>
+                                        <td class="center td-third-content">Total Page: &amp;nbsp;&amp;nbsp;</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div> -->
                 </div>
             </t>
         </t>
