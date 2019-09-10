@@ -59,7 +59,6 @@
                     width: 49%;
                     vertical-align: top;
                     display: inline-block;
-                    float: left;
                 }
                 .receiver-section {
                     margin-top: 1em;
